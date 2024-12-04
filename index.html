@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- Tailwind link CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.1/css/all.min.css"
+      integrity="sha512-5Hs3dF2AEPkpNAR7UiOHba+lRSJNeM2ECkwxUIxC1Q/FLycGTbNapWXB4tP889k5T5Ju8fs4b1P5z/iB4nMfSQ=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      // use fetch to get data from github api for the user
+      const user = () =>
+        fetch("https://api.github.com/users/norbertBM")
+          .then((response) => response.json())
+          .then((data) => {
+            console.log(data);
+            // User img
+            const img = document.createElement("img");
+            img.classList.add("w-24", "h-24", "rounded-full");
+            img.src = data.avatar_url;
+            document.querySelector("#user").appendChild(img);
+            // User Name
+            const name = document.createElement("h1");
+            name.classList.add("text-2xl", "font-bold");
+            name.textContent = data.name;
+            document.querySelector("#user").appendChild(name);
+            // User bio
+            const bio = document.createElement("p");
+            bio.classList.add("text-sm", "text-gray-300");
+            bio.textContent = data.bio;
+            document.querySelector("#user").appendChild(bio);
+          });
+      user();
+    </script>
+    <div class="flex justify-center items-center h-screen bg-gray-100">
+      <div
+        style="
+          background-image: url('./bg_img.jpg');
+          background-size: cover;
+          background-position: center;
+        "
+        class="text-white rounded-2xl shadow-md w-96 h-[700px]"
+      >
+        <div
+          id="user"
+          class="flex bg-black rounded-2xl py-10 shadow-2xl flex-col justify-center items-center gap-1 z-10"
+        ></div>
+        <section class="p-8">
+          <div
+            class="flex bg-white rounded-3xl text-slate-800 text-center font-medium p-6 mb-8 shadow-lg border-2 border-white hover:bg-black hover:text-white hover:border-2 hover:border-gray-300 transition-all"
+          >
+            <a
+              class="flex-auto cursor-pointer"
+              href="https://volerelife.wordpress.com/web-development/web-dev-courses/"
+              >Portfolio</a
+            >
+            <div
+              class="flex-none rotate-90 cursor-pointer rounded-full text-slate-400 hover:text-white transition-all"
+            >
+              ...
+            </div>
+          </div>
+          <div
+            class="flex bg-white rounded-3xl text-slate-800 text-center font-medium p-6 mb-8 shadow-lg border-2 border-white hover:bg-black hover:text-white hover:border-2 hover:border-gray-300 transition-all"
+          >
+            <a class="flex-auto cursor-pointer">Website</a>
+            <div
+              class="flex-none rotate-90 cursor-pointer rounded-full text-slate-400 hover:text-white transition-all"
+            >
+              ...
+            </div>
+          </div>
+          <div
+            class="flex bg-white rounded-3xl text-slate-800 text-center font-medium p-6 mb-8 shadow-lg border-2 border-white hover:bg-black hover:text-white hover:border-2 hover:border-gray-300 transition-all"
+          >
+            <a class="flex-auto cursor-pointer" id="contact">Contact me</a>
+
+            <div
+              class="flex-none rotate-90 cursor-pointer rounded-full text-slate-400 hover:text-white transition-all"
+            >
+              ...
+            </div>
+          </div>
+        </section>
+        <!-- Social media section -->
+        <section
+          class="flex justify-between py-2 px-4 mx-8 text-slate-800 text-2xl bg-slate-100 rounded-2xl"
+        >
+          <a href="https://github.com">
+            <i
+              class="fa-brands fa-github hover:scale-125 transition-all"
+            ></i> </a
+          ><a href="https://github.com">
+            <i
+              class="fa-brands fa-linkedin hover:scale-125 transition-all"
+            ></i> </a
+          ><a href="https://github.com">
+            <i
+              class="fa-brands fa-youtube hover:scale-125 transition-all"
+            ></i> </a
+          ><a href="https://github.com">
+            <i
+              class="fa-brands fa-instagram hover:scale-125 transition-all"
+            ></i>
+          </a>
+        </section>
+        <form
+          action=""
+          class="bg-white text-slate-800 space-y-4 p-8 rounded-2xl hidden relative -translate-y-[400px]"
+        >
+          <h1 class="text-2xl font-bold text-center">Contact me</h1>
+          <!-- close form -->
+          <div
+            class="flex justify-center items-center p-1 rounded-full w-8 h-8 hover:bg-slate-200 hover:shadow-lg transition-all absolute top-2 right-2"
+          >
+            <i class="fa-solid fa-times cursor-pointer"></i>
+          </div>
+          <div>
+            <label for="name" class="block">Name</label>
+            <input
+              type="text"
+              id="name"
+              class="w-full border border-gray-300 rounded p-2"
+            />
+          </div>
+          <div>
+            <label for="email" class="block">Email</label>
+            <input
+              type="email"
+              id="email"
+              class="w-full border border-gray-300 rounded p-2"
+            />
+          </div>
+          <div>
+            <label for="password" class="block">Message</label>
+            <textarea
+              name="message"
+              id="message"
+              cols="10"
+              rows="2"
+              class="w-full border border-gray-300 rounded p-2"
+            ></textarea>
+          </div>
+          <button
+            type="submit"
+            class="w-full bg-blue-500 text-white p-2 rounded"
+          >
+            Send
+          </button>
+        </form>
+      </div>
+    </div>
+    <script>
+      //   Show hide contact form
+      const form = document.querySelector("form");
+      const contact = document.querySelector("#contact");
+      let close = document.querySelector(".fa-times");
+
+      contact.addEventListener("click", () => {
+        form.classList.toggle("hidden");
+      });
+
+      close.addEventListener("click", () => {
+        form.classList.toggle("hidden");
+      });
+    </script>
+  </body>
+</html>
